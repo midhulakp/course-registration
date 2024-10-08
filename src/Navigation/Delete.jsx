@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 
-const Edit = () => {
+const Delete = () => {
   const navigate = useNavigate();
   let { id } = useParams();
 
@@ -35,7 +35,7 @@ const Edit = () => {
     e.preventDefault();
     try {
       let payload = { ...state };
-      await axios.put(`http://localhost:5000/course/${id}`, payload);
+      await axios.delete(`http://localhost:5000/course/${id}`, payload);
       navigate("/display");
     } catch (err) {
       console.error("Error updating data", err);
@@ -82,7 +82,7 @@ const Edit = () => {
                 </tr>
                 <tr className='btn-div'>
                   <td colSpan="2" style={{ textAlign: 'center' }}>
-                    <button className='btn' type="submit" disabled={!trainer || !subject}>REGISTER</button>
+                    <button className='btn' type="submit" disabled={!trainer || !subject}>DELETE</button>
                   </td>
                 </tr>
               </tbody>
@@ -94,4 +94,4 @@ const Edit = () => {
   );
 };
 
-export default Edit;
+export default Delete;

@@ -1,39 +1,15 @@
 {
   "course": [
     {
-      "id": "8106",
-      "trainer": "darshan",
-      "subject": "react js"
-    },
-    {
-      "id": "6bdd",
-      "trainer": "shankar",
-      "subject": "java"
-    },
-    {
-      "id": "ee83",
-      "trainer": "darshan",
-      "subject": "react js"
-    },
-    {
-      "id": "d42f",
-      "trainer": "darshan",
-      "subject": "react js"
-    },
-    {
-      "id": "639e",
-      "trainer": "shankar",
-      "subject": "react js"
-    },
-    {
-      "id": "dabb",
-      "trainer": "sreedhar",
-      "subject": "jdbc"
-    },
-    {
-      "id": "6b07",
-      "trainer": "shankar",
-      "subject": "react js"
+      "id": "c57d",
+      "fullname": "Midhula K P",
+      "email": "kpmidhula7@gmail.com",
+      "num": "9061892053",
+      "degree": "Btech",
+      "stream": "cse",
+      "college": "jec",
+      "cgpa": "8.78",
+      "course": "MERN STACK"
     }
   ]
 }

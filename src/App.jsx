@@ -23,10 +23,13 @@ import CourseDetailsPage from './Navigation/CourseDetailsPage'
 import RegistrationPage from './Navigation/RegistrationPage'
 import Layout from './Navigation/Layout'
 import VideoPlayerPage from './VideoPlayerPage'
-import Display from './Navigation/Display'
 import TrainerDetails from './Navigation/TrainerDetails'
 import FetchDetails from './Navigation/FetchDetails'
 import Edit from './Navigation/Edit'
+import Delete from './Navigation/Delete'
+import Registration from './Navigation/Registration'
+import EditStudent from './Navigation/EditStudent'
+import Deletestudent from './Navigation/Deletestudent'
 
 let router = createBrowserRouter([
     {
@@ -60,6 +63,22 @@ let router = createBrowserRouter([
             {
                 path:"edit/:id",
                 element:<Edit></Edit>
+            },
+            {
+                path:"delete/:id",
+                element:<Delete></Delete>
+            },
+            {
+                path:"student",
+                element:<Registration></Registration>
+            },
+            {
+                path:"editstd/:id",
+                element:<EditStudent></EditStudent>
+            },
+            {
+                path:"deletestd/:id",
+                element:<Deletestudent></Deletestudent>
             }
         ],
     },

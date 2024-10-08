@@ -1,14 +1,12 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-import { useNavigation } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
-const RegistrationPage = () => {
+const EditStudent = () => {
+    const navigate = useNavigate();
+  let { id } = useParams();
 
-  let navigate = useNavigation()
-
-  const [formData, setFormData] = useState({
+  let [state, setState] = useState({
     fullname: '',
     email: '',
     num: '',
@@ -19,40 +17,38 @@ const RegistrationPage = () => {
     course: ''
   });
 
-  let {fullname,email,num,degree,stream,college,cgpa,course} =formData;
+  let { fullname,email,num,degree,stream,college,cgpa,course } = state;
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+    setState({
+      ...state, [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = async(e) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let { data } = await axios.get(`http://localhost:5001/detail/${id}`);
+        setState(data);
+      } catch (err) {
+        console.error("Error fetching data", err);
+      }
+    };
+    fetchData();
+  }, [id]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-   try{
-
-    let payload  ={...formData}
-
-    let {data} = await axios.post('http://localhost:5000/course',payload)
-    console.log('Form Data:', formData);
-
-    toast.success('Registration Successful!');
-
-    setFormData({formDate});
-    navigate("/studentdata")
-
-   }
-   catch(err){
-    console.log(err);
-    
-   }
-    
+    try {
+      let payload = { ...state };
+      await axios.put(`http://localhost:5001/detail/${id}`, payload);
+      navigate("/display");
+    } catch (err) {
+      console.error("Error updating data", err);
+    }
   };
-
   return (
-    <div className='main-div'>
+<div className='main-div'>
       <ToastContainer />
       <form onSubmit={handleSubmit}>
         <fieldset>
@@ -68,7 +64,7 @@ const RegistrationPage = () => {
                     type="text" 
                     name="fullname" 
                     id="fullname" 
-                    value={formData.fullname} 
+                    value={state.fullname} 
                     onChange={handleChange} 
                     required 
                   />
@@ -83,7 +79,7 @@ const RegistrationPage = () => {
                     type="email" 
                     name="email" 
                     id="email" 
-                    value={formData.email} 
+                    value={state.email} 
                     onChange={handleChange} 
                     required 
                   />
@@ -98,7 +94,7 @@ const RegistrationPage = () => {
                     type="tel" 
                     name="num" 
                     id="num" 
-                    value={formData.num} 
+                    value={state.num} 
                     onChange={handleChange} 
                     required 
                   />
@@ -113,7 +109,7 @@ const RegistrationPage = () => {
                     type="text" 
                     name="degree" 
                     id="degree" 
-                    value={formData.degree} 
+                    value={state.degree} 
                     onChange={handleChange} 
                     required 
                   />
@@ -128,7 +124,7 @@ const RegistrationPage = () => {
                     type="text" 
                     name="stream" 
                     id="stream" 
-                    value={formData.stream} 
+                    value={state.stream} 
                     onChange={handleChange} 
                     required 
                   />
@@ -143,7 +139,7 @@ const RegistrationPage = () => {
                     type="text" 
                     name="college" 
                     id="college" 
-                    value={formData.college} 
+                    value={state.college} 
                     onChange={handleChange} 
                     required 
                   />
@@ -158,7 +154,7 @@ const RegistrationPage = () => {
                     type="number" 
                     name="cgpa" 
                     id="cgpa" 
-                    value={formData.cgpa} 
+                    value={state.cgpa} 
                     onChange={handleChange} 
                     required 
                   />
@@ -172,7 +168,7 @@ const RegistrationPage = () => {
                   <select 
                     name="course" 
                     id="course" 
-                    value={formData.course} 
+                    value={state.course} 
                     onChange={handleChange} 
                     required
                   >
@@ -186,7 +182,7 @@ const RegistrationPage = () => {
               </tr>
               <tr className='btn-div'>
                 <td colSpan="2" style={{ textAlign: 'center' }}>
-                  <button className='btn' type="submit" disabled={!formData.fullname && !formData.email ? true : false}>REGISTER</button>
+                  <button className='btn' type="submit" disabled={!state.fullname && !state.email ? true : false}>EDIT</button>
                 </td>
               </tr>
             </tbody>
@@ -197,4 +193,4 @@ const RegistrationPage = () => {
   );
 };
 
-export default RegistrationPage;
+export default EditStudent

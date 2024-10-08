@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const Display = ({trainer,subject}) => {
+const Display = ({trainer,subject,id}) => {
    
   
   return (
@@ -13,8 +13,8 @@ const Display = ({trainer,subject}) => {
             <h2>Subject: {subject}</h2>
         </div>
         <div className='fun'>
-              <Link to={'/edit/${id}'} className='edit'>Edit</Link>
-              <Link to={'/edit/${id}'} className='edit'>Delete</Link>
+              <Link to={`/edit/${id}`} className='edit'>Edit</Link>
+              <Link to={`/delete/${id}`} className='edit'>Delete</Link>
         </div>
       </div>
       
